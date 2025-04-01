@@ -105,6 +105,14 @@ Serviços que serão utilizados durante a migração:
 | **AWS DataSync**                                | Configuração para a migração dos arquivos estáticos.                                                     |
 | **AWS MGN (Application Migration Service)**     | Configuração para a replicação dos servidores.                                                           |
 
+### Migração
+
+| **Serviço/Etapa**                        | **Configuração/Descrição**                                                                                                 |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **Instalação do AWS MGN Agent**          | Instalação do **Agente AWS MGN (Application Migration Service)** nos servidores locais para replicação.                    |
+| **AWS DMS (Database Migration Service)** | Utilização do **AWS DMS (Database Migration Service)** para migração do banco de dados MySQL do ambiente local para a AWS. |
+| **Criação das máquinas EC2**             | Criação das instâncias **EC2** na AWS que espelham a aplicação atual.                                                      |
+
 ## Modernização
 
 ## Referências
