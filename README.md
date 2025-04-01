@@ -42,39 +42,68 @@ Diagrama da situação atual:
 
 ## Migração
 
-### Planejamento para a Migração
+A migração será feita a partir do modo Lift-and-Shift (Rehosting), onde, toda a infraestrutura local será transferida para a núvem sem grandes mudanças nos sistemas e aplicações.
 
-Comparando os serviços:
+<div align="center">
 
-| Serviço        | On premise       | AWS           | Descrição |
-| -------------- | ---------------- | ------------- | --------- |
-| Frontend       | Servidor (React) | EC2           | Descrição |
-| Banco de Dados | Servidor (MySQL) | RDS (MySQL)   | Descrição |
-| NGinx          | Servidor (NGinx) | Load Balancer | Descrição |
-| Arquivos       | Servidor         | S3            | Descrição |
+<img src="https://community.nasscom.in/sites/default/files/inline-images/Migration.png" height="300px" />
+
+Source: [nasscom.in](https://community.nasscom.in/communities/application/lift-and-shift-cloud-migration-application-modernization-comprehensive)
+
+</div>
+
+## Etapas
+
+A migração vai ocorrer em diferentes etapas:
+
+1. Planejamento
+2. Preparação
+3. Migração
+   - Banco de Dados
+   - Arquivos
+   - Aplicação
+4. Observação
+5. Observação
+
+### Planejamento
+
+Análise e comparação dos serviços utilizando na empresa com as oferencidas pela AWS:
+
+|                                                       -                                                        | Serviço       | On premise                  |
+| :------------------------------------------------------------------------------------------------------------: | ------------- | --------------------------- |
+|                    <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                     | EC2           | Servidor 1 (Frontend)       |
+|                    <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="40">                    | RDS (MySQL)   | Servidor 2 (Banco de Dados) |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | Load Balancer | Servidor 3 (Nginx)          |
+|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" width="40">           | S3            | Servidor 3 (Local)          |
 
 Serviços extras:
 
-| Serviço                    | Descrição |
-| -------------------------- | --------- |
-| DMS                        | Descrição |
-| MGN                        | Descrição |
-| EBS                        | Descrição |
-| VPC (Subnets, Route Table) | Descrição |
+|                                                       -                                                       | Serviços                                   |
+| :-----------------------------------------------------------------------------------------------------------: | ------------------------------------------ |
+|            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS                                        |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40"> | VPC <br> <sub>+ Subnets, Route Table</sub> |
+|         <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="40">          | Cloud Watch                                |
 
-### Passo a passo
+Serviços que serão utilizados durante a migração:
 
-#### Preparação dos Serviços
+|                                                      -                                                       | Serviço                             |
+| :----------------------------------------------------------------------------------------------------------: | ----------------------------------- |
+|           <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/DataSync.svg" width="40">            | DataSync                            |
+|                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                  | AWS Backup                          |
+|       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | Database Migration Service (DMS)    |
+| <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | Application Migration Service (MGN) |
 
-#### Migração do Banco de Dados
+### Preparação
 
-1. Preparação
-2. Migração
+É durante a etapa de preparação que iremos configurar todas os nossos serviços para iniciar a migração dos dados e aplicações para a **AWS**:
 
-#### Migração dos Aplicação + Arquivos
-
-1. Preparação
-2. Migração
+| Serviço                                         | Configuração                                                                                             |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **IAM (Identity and Access Management)**        | Configuração do controle de acesso com políticas de menor privilégio e autenticação multifatorial (MFA). |
+| **VPC, Subnets, Route Tables, Security Groups** | Configuração das regras de acesso e saída para maior segurança.                                          |
+| **AWS DMS (Database Migration Service)**        | Configuração para a migração do banco de dados.                                                          |
+| **AWS DataSync**                                | Configuração para a migração dos arquivos estáticos.                                                     |
+| **AWS MGN (Application Migration Service)**     | Configuração para a replicação dos servidores.                                                           |
 
 ## Modernização
 
