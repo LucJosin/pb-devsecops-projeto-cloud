@@ -70,7 +70,7 @@ A migração vai ocorrer em diferentes etapas:
 
 Definição das instâncias que serão utilizas na AWS:
 
-- **Frontend**: Instâncias EC2 (tipo **t4g.micro** / vCPU: 2, Memória: 1 GB).
+- **Frontend**: Instâncias EC2 (tipo **t4g.small** / vCPU: 2, Memória: 2 GB).
 - **Backend**: Instâncias EC2 (tipo **t4g.medium** / vCPU: 2, Memória: 4 GB).
 - **Banco de Dados**: Amazon RDS MySQL (tipo **db.m5.xlarge** / vCPU: 2, Memória: 16 GB).
 
