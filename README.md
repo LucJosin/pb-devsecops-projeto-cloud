@@ -84,16 +84,15 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 |                    <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="40">                    | RDS (MySQL)   | Servidor 2 (Banco de Dados) |
 | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | Load Balancer | Servidor 3 (Nginx)          |
 
-Serviços extras:
+#### Serviços extras:
 
 |                                                       -                                                       | Serviços                                                     |
 | :-----------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------ |
 | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="40">  | IAM                                                          |
 |            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS                                                          |
 | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40"> | VPC <br> <sub>+ Subnets, Route Table e Security Groups</sub> |
-|         <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="40">          | CloudWatch                                                   |
 
-Serviços que serão utilizados durante a migração:
+#### Serviços que serão utilizados durante a migração:
 
 |                                                      -                                                       | Serviço                             |
 | :----------------------------------------------------------------------------------------------------------: | ----------------------------------- |
@@ -102,13 +101,33 @@ Serviços que serão utilizados durante a migração:
 |       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | Database Migration Service (DMS)    |
 | <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | Application Migration Service (MGN) |
 
-Diagrama de Migração:
+#### Diagrama de Migração:
 
 <div align="center">
 
 ![Diagrama da Migração](./assets/AWS-Migration.png)
 
 </div>
+
+#### Custo total (Migração)
+
+|                                                      -                                                       | **Serviço**            | **Custo (3 dias)**        |
+| :----------------------------------------------------------------------------------------------------------: | ---------------------- | ------------------------- |
+|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – Webapp       | ~ 0.88 USD                |
+|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – API's        | ~ 1.76 USD                |
+|       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | AWS DMS (1 instância)  | ~ 16.62 USD               |
+| <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | AWS MGN (2 servidores) | ~ 3.02 USD                |
+|      <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Client-VPN.svg" width="40">      | VPN Site-to-site       | ~ 1.00 USD                |
+|                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                  | AWS Backup             | ~ 0.32 USD                |
+|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | RDS (MySQL) **\*\*\*** | ~ 38.74 USD               |
+|                                                      -                                                       | TOTAL                  | **62.34 USD** (20.78/dia) |
+
+> Link para a estimativa: [Migração para AWS](https://calculator.aws/#/estimate?id=d3e50068894fc34fd0ad490c0defd9aeaf010520).
+
+> [!NOTE]
+>
+> - Os custos foram estimados com base no plano **on-demand** de 1 ano.
+> - Região utilizada: **US East (N. Virginia/us-east-1)**.
 
 ### Preparação
 
@@ -132,6 +151,32 @@ Diagrama de Migração:
 | **AWS DMS (Database Migration Service)** | Utilização do **AWS DMS (Database Migration Service)** para migração do banco de dados MySQL do ambiente local para a AWS. |
 
 ## Modernização
+
+A modernização será realizada em três fases:
+
+1. Containerização das Aplicações
+
+   - Containerizar APIs e Frontend utilizando Docker.
+   - Criar Dockerfiles para cada serviço e definir as dependências.
+
+2. Orquestração e Deploy no Amazon EKS
+
+   - Criar um Cluster Amazon **EKS** para gerenciar os containers.
+   - Definir manifests **Kubernetes** _(Deployments, Services, ConfigMaps, Secrets, Ingress)_.
+   - Configurar um **Application Load Balancer (ALB)** para gerenciar o tráfego HTTP/HTTPS.
+   - Habilitar **Auto Scaling** para escalar automaticamente os pods conforme a demanda.
+
+3. Armazenamento e Persistência
+
+   - Migrar arquivos estáticos para o **S3** com **CloudFront** para distribuição rápida.
+   - Utilizar **RDS MySQL** (Multi-AZ) para garantir tolerância a falhas.
+   - Implementar **EFS** caso seja necessário um sistema de arquivos compartilhado entre os pods.
+
+### Segurança e Compliance
+
+- Controle de acesso com **IAM** e **Security Groups**.
+- Segurança na rede com **AWS WAF**, **Shield** e regras de **VPC**.
+- Criptografia de dados com **S3**, **RDS** e **Secrets Manager**.
 
 ## Referências
 
