@@ -34,11 +34,12 @@ Diagrama da situação atual:
 
 ## Obejtivo Final
 
-- Ambiente Kubernetes
-- Banco de dados gerenciado (PaaS e Multi-AZ)
-- Backup de dados
-- Sistema para persistência de objetos (imagens, vídeos etc.)
-- Requisitos de segurança avançados
+- Migração bem sucedida para AWS;
+- Ambiente modernizado com Kubernetes;
+- Banco de dados gerenciado (PaaS e Multi-AZ);
+- Backup de dados;
+- Sistema para persistência de objetos (imagens, vídeos etc.);
+- Requisitos de segurança avançados;
 
 ## Migração
 
@@ -67,6 +68,14 @@ A migração vai ocorrer em diferentes etapas:
 
 ### Planejamento
 
+Definição das instâncias que serão utilizas na AWS:
+
+- **Frontend**: Instâncias EC2 (tipo **t4g.micro** / vCPU: 2, Memória: 1 GB).
+- **Backend**: Instâncias EC2 (tipo **t4g.medium** / vCPU: 2, Memória: 4 GB).
+- **Banco de Dados**: Amazon RDS MySQL (tipo **db.m5.xlarge** / vCPU: 2, Memória: 16 GB).
+
+> De início, os arquivos estáticos vão ser salvos no EBS
+
 Análise e comparação dos serviços utilizando na empresa com as oferencidas pela AWS:
 
 |                                                       -                                                        | Serviço       | On premise                  |
@@ -74,24 +83,32 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 |                    <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                     | EC2           | Servidor 1 (Frontend)       |
 |                    <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="40">                    | RDS (MySQL)   | Servidor 2 (Banco de Dados) |
 | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | Load Balancer | Servidor 3 (Nginx)          |
-|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" width="40">           | S3            | Servidor 3 (Local)          |
 
 Serviços extras:
 
-|                                                       -                                                       | Serviços                                   |
-| :-----------------------------------------------------------------------------------------------------------: | ------------------------------------------ |
-|            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS                                        |
-| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40"> | VPC <br> <sub>+ Subnets, Route Table</sub> |
-|         <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="40">          | Cloud Watch                                |
+|                                                       -                                                       | Serviços                                                     |
+| :-----------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------ |
+| <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="40">  | IAM                                                          |
+|            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS                                                          |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40"> | VPC <br> <sub>+ Subnets, Route Table e Security Groups</sub> |
+|         <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="40">          | CloudWatch                                                   |
 
 Serviços que serão utilizados durante a migração:
 
 |                                                      -                                                       | Serviço                             |
 | :----------------------------------------------------------------------------------------------------------: | ----------------------------------- |
-|           <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/DataSync.svg" width="40">            | DataSync                            |
 |                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                  | AWS Backup                          |
+|      <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Client-VPN.svg" width="40">      | VPN/VPN Connection                  |
 |       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | Database Migration Service (DMS)    |
 | <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | Application Migration Service (MGN) |
+
+Diagrama de Migração:
+
+<div align="center">
+
+![Diagrama da Migração](./assets/AWS-Migration.png)
+
+</div>
 
 ### Preparação
 
@@ -101,9 +118,11 @@ Serviços que serão utilizados durante a migração:
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | **IAM (Identity and Access Management)**        | Configuração do controle de acesso com políticas de menor privilégio e autenticação multifatorial (MFA). |
 | **VPC, Subnets, Route Tables, Security Groups** | Configuração das regras de acesso e saída para maior segurança.                                          |
-| **AWS DMS (Database Migration Service)**        | Configuração para a migração do banco de dados.                                                          |
-| **AWS DataSync**                                | Configuração para a migração dos arquivos estáticos.                                                     |
-| **AWS MGN (Application Migration Service)**     | Configuração para a replicação dos servidores.                                                           |
+| **VPN/VPN Connection**                          | Configuração de VPN para conexão segura entre rede on premise e a AWS.                                   |
+| **AWS Backup**                                  | Configuração de políticas de backup automatizado para bancos de dados, volumes EBS e instâncias EC2.     |
+| **Amazon CloudWatch**                           | Configuração do monitoramento de logs, métricas e alarmes e segurança dos serviços.                      |
+| **DMS (Database Migration Service)**            | Configuração para a migração do banco de dados.                                                          |
+| **MGN (Application Migration Service)**         | Configuração para a replicação dos servidores.                                                           |
 
 ### Migração
 
@@ -111,7 +130,6 @@ Serviços que serão utilizados durante a migração:
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **Instalação do AWS MGN Agent**          | Instalação do **Agente AWS MGN (Application Migration Service)** nos servidores locais para replicação.                    |
 | **AWS DMS (Database Migration Service)** | Utilização do **AWS DMS (Database Migration Service)** para migração do banco de dados MySQL do ambiente local para a AWS. |
-| **Criação das máquinas EC2**             | Criação das instâncias **EC2** na AWS que espelham a aplicação atual.                                                      |
 
 ## Modernização
 
