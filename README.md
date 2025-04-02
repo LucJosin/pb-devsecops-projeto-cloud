@@ -82,14 +82,14 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 | :------------------------------------------------------------------------------------------------------------: | ------------- | --------------------------- |
 |                    <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                     | EC2           | Servidor 1 (Frontend)       |
 |                    <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="40">                    | RDS (MySQL)   | Servidor 2 (Banco de Dados) |
-| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | Load Balancer | Servidor 3 (Nginx)          |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | Load Balancer | Servidor 3 (API's + Nginx)  |
 
 #### Serviços extras:
 
 |                                                       -                                                       | Serviços                                                     |
 | :-----------------------------------------------------------------------------------------------------------: | ------------------------------------------------------------ |
 | <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/IAM-Identity-Center.svg" width="40">  | IAM                                                          |
-|            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS                                                          |
+|            <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | EBS <br> <sub>(Utilizado pelo AMS/MGN)</sub>                 |
 | <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40"> | VPC <br> <sub>+ Subnets, Route Table e Security Groups</sub> |
 
 #### Serviços que serão utilizados durante a migração:
