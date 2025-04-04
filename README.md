@@ -63,8 +63,6 @@ A migração vai ocorrer em diferentes etapas:
    - Banco de Dados
    - Arquivos
    - Aplicação
-4. Observação
-5. Observação
 
 ### Planejamento
 
@@ -109,7 +107,7 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 
 </div>
 
-#### Custo total (Migração)
+#### Custo (Migração)
 
 |                                                      -                                                       | **Serviço**            | **Custo (3 dias)**        |
 | :----------------------------------------------------------------------------------------------------------: | ---------------------- | ------------------------- |
@@ -122,12 +120,14 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 |           <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | RDS (MySQL) **\*\*\*** | ~ 38.74 USD               |
 |                                                      -                                                       | TOTAL                  | **62.34 USD** (20.78/dia) |
 
-> Link para a estimativa: [Migração para AWS](https://calculator.aws/#/estimate?id=d3e50068894fc34fd0ad490c0defd9aeaf010520).
+> Link para a estimativa: [Migração para AWS](https://calculator.aws/#/estimate?id=29258dfa209b63ff6c0509c11bc9d354612c49ad).
 
 > [!NOTE]
 >
 > - Os custos foram estimados com base no plano **on-demand** de 1 ano.
 > - Região utilizada: **US East (N. Virginia/us-east-1)**.
+>
+> **\*\*\*: O RDS será utilizado durante a migração e modernização**
 
 ### Preparação
 
@@ -139,7 +139,6 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 | **VPC, Subnets, Route Tables, Security Groups** | Configuração das regras de acesso e saída para maior segurança.                                          |
 | **VPN/VPN Connection**                          | Configuração de VPN para conexão segura entre rede on premise e a AWS.                                   |
 | **AWS Backup**                                  | Configuração de políticas de backup automatizado para bancos de dados, volumes EBS e instâncias EC2.     |
-| **Amazon CloudWatch**                           | Configuração do monitoramento de logs, métricas e alarmes e segurança dos serviços.                      |
 | **DMS (Database Migration Service)**            | Configuração para a migração do banco de dados.                                                          |
 | **MGN (Application Migration Service)**         | Configuração para a replicação dos servidores.                                                           |
 
@@ -156,8 +155,8 @@ A modernização será realizada em três fases:
 
 1. Containerização das Aplicações
 
-   - Containerizar APIs e Frontend utilizando Docker.
-   - Criar Dockerfiles para cada serviço e definir as dependências.
+   - Containerizar **APIs** e **Frontend** utilizando **Docker**.
+   - Criar **Dockerfile** para cada serviço e definir as dependências.
 
 2. Orquestração e Deploy no Amazon EKS
 
@@ -175,8 +174,16 @@ A modernização será realizada em três fases:
 ### Segurança e Compliance
 
 - Controle de acesso com **IAM** e **Security Groups**.
-- Segurança na rede com **AWS WAF**, **Shield** e regras de **VPC**.
+- Segurança na rede com **AWS WAF** e regras de **VPC**.
 - Criptografia de dados com **S3**, **RDS** e **Secrets Manager**.
+
+#### Diagrama de Modernização:
+
+<div align="center">
+
+![Diagrama da Migração](./assets/AWS-Modernizacao.png)
+
+</div>
 
 ## Referências
 
@@ -184,31 +191,3 @@ A modernização será realizada em três fases:
 - https://docs.aws.amazon.com/dms/
 - https://www.youtube.com/watch?v=8CABO6FdzwU&ab_channel=AmazonWebServices
 - https://www.youtube.com/watch?v=bJCmZn9fASM&ab_channel=DigitalCloudTraining
-
-> Apagar depois
-
-## Migração
-
-- MGN
-- DMS
-- S3
-- EC2
-- RDS
-- EBS
-
-## Serviços
-
-- Application Migration Service
-- Database Migration Service
-- DataSync
-- S3
-- EC2
-- RDS
-- Elastic Block Store
-- Load Balance
-- NAT Gateway
-- Internet Gateway
-- WAF
-- Route 53
-- CloudFront
-- CloudWatch
