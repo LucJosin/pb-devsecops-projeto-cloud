@@ -114,15 +114,15 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 
 #### Custo (Migração)
 
-|                                                      -                                                       | **Serviço**            | **Custo (3 dias)**        |
-| :----------------------------------------------------------------------------------------------------------: | ---------------------- | ------------------------- |
-|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – Webapp       | ~ 0.88 USD                |
-|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – API's        | ~ 1.76 USD                |
-|       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | AWS DMS (1 instância)  | ~ 16.62 USD               |
-| <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | AWS MGN (2 servidores) | ~ 3.02 USD                |
-|      <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Client-VPN.svg" width="40">      | VPN Site-to-site       | ~ 1.00 USD                |
-|                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                  | AWS Backup             | ~ 0.32 USD                |
-|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | RDS (MySQL) **\*\*\*** | ~ 38.74 USD               |
+|                                                      -                                                       | **Serviço**            |        **Custo (3 dias)** |
+| :----------------------------------------------------------------------------------------------------------: | ---------------------- | ------------------------: |
+|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – Webapp       |                ~ 0.88 USD |
+|                   <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="40">                    | AWS EC2 – API's        |                ~ 1.76 USD |
+|       <img src="https://icon.icepanel.io/AWS/svg/Database/Database-Migration-Service.svg" width="40">        | AWS DMS (1 instância)  |               ~ 16.62 USD |
+| <img src="https://icon.icepanel.io/AWS/svg/Migration-Transfer/Application-Migration-Service.svg" width="40"> | AWS MGN (2 servidores) |                ~ 3.02 USD |
+|      <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Client-VPN.svg" width="40">      | VPN Site-to-site       |                ~ 1.00 USD |
+|                  <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                  | AWS Backup             |                ~ 0.32 USD |
+|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Elastic-Block-Store.svg" width="40">            | RDS (MySQL) **\*\*\*** |               ~ 38.74 USD |
 |                                                      -                                                       | TOTAL                  | **62.34 USD** (20.78/dia) |
 
 > Link para a estimativa: [Migração para AWS](https://calculator.aws/#/estimate?id=29258dfa209b63ff6c0509c11bc9d354612c49ad).
@@ -189,9 +189,25 @@ A modernização será realizada em quatro fases:
 
 <div align="center">
 
-![Diagrama da Migração](./assets/AWS-Modernizacao.png)
+![Diagrama da Modernização](./assets/AWS-Modernizacao.png)
 
 </div>
+
+#### Custo (Modernização)
+
+|                                                       -                                                        | **Serviço**     | **Custo (Mensal)** | **Custo (Anual)** |
+| :------------------------------------------------------------------------------------------------------------: | --------------- | -----------------: | ----------------: |
+|       <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Kubernetes-Service.svg" width="40">        | EKS             |       ~ 146.00 USD |       ~ 1,752 USD |
+|           <img src="https://icon.icepanel.io/AWS/svg/Storage/Simple-Storage-Service.svg" width="40">           | S3              |         ~ 0.58 USD |        ~ 6.96 USD |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Elastic-Load-Balancing.svg" width="40"> | ALB             |        ~ 22.27 USD |      ~ 267.24 USD |
+|                    <img src="https://icon.icepanel.io/AWS/svg/Database/RDS.svg" width="40">                    | RDS (MySQL) (2) |     ~ 1,145.42 USD |   ~ 13,745.04 USD |
+|                   <img src="https://icon.icepanel.io/AWS/svg/Storage/Backup.svg" width="40">                   | AWS Backup      |         ~ 1.08 USD |       ~ 12.96 USD |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="40">  | VPC             |        ~ 83.00 USD |         ~ 996 USD |
+|          <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/WAF.svg" width="40">          | WAF             |        ~ 44.00 USD |         ~ 528 USD |
+|    <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Secrets-Manager.svg" width="40">    | Secrets Manager |         ~ 0.40 USD |         ~ 4.8 USD |
+|        <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Container-Service.svg" width="40">        | ECR             |         ~ 5.00 USD |          ~ 60 USD |
+|    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Notification-Service.svg" width="40">     | SNS             |         ~ 3.32 USD |       ~ 39.84 USD |
+|                                                       -                                                        | TOTAL           |   **1,478.54 USD** | **17,742.48 USD** |
 
 ## Referências
 
