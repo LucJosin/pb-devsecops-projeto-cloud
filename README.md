@@ -207,7 +207,12 @@ A modernização será realizada em quatro fases:
 |    <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/Secrets-Manager.svg" width="40">    | Secrets Manager |         ~ 0.40 USD |         ~ 4.8 USD |
 |        <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Container-Service.svg" width="40">        | ECR             |         ~ 5.00 USD |          ~ 60 USD |
 |    <img src="https://icon.icepanel.io/AWS/svg/App-Integration/Simple-Notification-Service.svg" width="40">     | SNS             |         ~ 3.32 USD |       ~ 39.84 USD |
+|       <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="40">       | CloudFront      |        ~ 11.87 USD |      ~ 142.44 USD |
+|          <img src="https://icon.icepanel.io/AWS/svg/Management-Governance/CloudWatch.svg" width="40">          | CloudWatch      |         ~ 9.10 USD |       ~ 109.2 USD |
+|        <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Route-53.svg" width="40">        | Route 53        |         ~ 6.30 USD |          ~ 78 USD |
 |                                                       -                                                        | TOTAL           |   **1,478.54 USD** | **17,742.48 USD** |
+
+> Link para a estimativa: [Modernização na AWS](https://calculator.aws/#/estimate?id=0ad294f27823276c56b35c89bf9456e036e91fdb).
 
 ## Referências
 
