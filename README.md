@@ -5,6 +5,7 @@
 </h1>
 
 👥 Integrantes do Grupo:
+
 - Lucas Pinheiro Josino da Silva
 - Fabiano Vandré Campelo de Medeiros
 
@@ -74,7 +75,7 @@ Definição das instâncias que serão utilizas na AWS:
 
 - **Frontend**: Instâncias EC2 (tipo **t4g.small** / vCPU: 2, Memória: 2 GB).
 - **Backend**: Instâncias EC2 (tipo **t4g.medium** / vCPU: 2, Memória: 4 GB).
-- **Banco de Dados**: Amazon RDS MySQL (tipo **db.m5.xlarge** / vCPU: 2, Memória: 16 GB).
+- **Banco de Dados**: Amazon RDS MySQL (tipo **db.t4g.xlarge** / vCPU: 2, Memória: 16 GB).
 
 > De início, os arquivos estáticos vão ser salvos no EBS
 
@@ -155,31 +156,34 @@ Análise e comparação dos serviços utilizando na empresa com as oferencidas p
 
 ## Modernização
 
-A modernização será realizada em três fases:
+A modernização será realizada em quatro fases:
 
 1. Containerização das Aplicações
 
-   - Containerizar **APIs** e **Frontend** utilizando **Docker**.
+   - Containerizar as **API's** e **Frontend** utilizando **Containers**.
    - Criar **Dockerfile** para cada serviço e definir as dependências.
+   - Armazenar e versionar as imagens de containers no **ECR** para facilitar o deploy no **EKS**.
 
-2. Orquestração e Deploy no Amazon EKS
+2. Armazenamento e Persistência
 
-   - Criar um Cluster Amazon **EKS** para gerenciar os containers.
-   - Definir manifests **Kubernetes** _(Deployments, Services, ConfigMaps, Secrets, Ingress)_.
-   - Configurar um **Application Load Balancer (ALB)** para gerenciar o tráfego HTTP/HTTPS.
+   - Utilizar arquivos estáticos no **S3** com **CloudFront** para distribuição rápida.
+   - Utilizar **RDS MySQL** _(Multi-AZ)_ com réplica para garantir tolerância a falhas.
+   - Configurar **AWS Backup** para proteger os dados armazenados no **RDS** com políticas de backup automatizadas.
+
+3. Segurança e Compliance
+
+   - Controle de acesso com **IAM** e **Security Groups**.
+   - Segurança na rede com **AWS WAF** e regras de **VPC** _(Subnet e Route Table)_.
+   - Criptografia de dados com **KMS**.
+   - Monitoramento de segurança com **CloudWatch**.
+   - Configurar **SNS** para alertas em caso de falhas, segurança ou uso incorreto dos recursos.
+
+4. Orquestração e Deploy no Amazon EKS
+
+   - Criar clusters com **EKS** para gerenciar os containers.
+   - Definir as configurações do **Kubernetes** _(Deployments, Services e ConfigMaps)_.
+   - Configurar um **Application Load Balancer (ALB)** para gerenciar o tráfego.
    - Habilitar **Auto Scaling** para escalar automaticamente os pods conforme a demanda.
-
-3. Armazenamento e Persistência
-
-   - Migrar arquivos estáticos para o **S3** com **CloudFront** para distribuição rápida.
-   - Utilizar **RDS MySQL** (Multi-AZ) para garantir tolerância a falhas.
-   - Implementar **EFS** caso seja necessário um sistema de arquivos compartilhado entre os pods.
-
-### Segurança e Compliance
-
-- Controle de acesso com **IAM** e **Security Groups**.
-- Segurança na rede com **AWS WAF** e regras de **VPC**.
-- Criptografia de dados com **S3**, **RDS** e **Secrets Manager**.
 
 #### Diagrama de Modernização:
 
