@@ -4,6 +4,10 @@
     <img align="center" src="https://logospng.org/download/uol/logo-uol-icon-256.png" width="30" height="30" /> Compass UOL - DevSecOps
 </h1>
 
+👥 Integrantes do Grupo:
+- Lucas Pinheiro Josino da Silva
+- Fabiano Vandré Campelo de Medeiros
+
 Projeto Cloud da trilha de **DevSecOps**, dividido em duas partes:
 
 1. Migração para AWS:
